@@ -2,7 +2,8 @@
 https://unix.stackexchange.com/questions/416785/how-to-send-commands-to-fbi-over-ssh <br/>
 uxplay -n $(hostname | tr '[:lower:]' '[:upper:]') -nh<br/>
 
-Create random 4digit pin for uxplay on each boot and display it on fbi
+Create random 4digit pin for uxplay on each boot and display it on fbi<br/>
+`echo $(printf %04d ${RANDOM:0:4})`
 
 
 Pre-built Raspberry Pi images to simplify using the Pi as a USB gadget.
