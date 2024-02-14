@@ -1,34 +1,9 @@
 name: Build Images
-"on":
-  push:
-    branches:
-      - main
-    tags:
-      - v*
-    paths:
-      - cue/**
-      - sources/**
-      - '*.json'
-      - .github/workflows/*.yaml
-  pull_request: {}
+on:
+  workflow_dispatch:
+
 jobs:
-  create-release:
-    outputs:
-      upload-url: ${{ steps.create-release.outputs.upload_url }}
-      id: ${{steps.create-release.outputs.id}}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out repo code
-        uses: actions/checkout@v2.3.4
-      - id: get_version
-        run: echo ::set-output name=VERSION::${GITHUB_REF#refs/tags/}
-      - name: Create release
-        id: create-release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh release create ${{github.ref}} --draft --title "Raspberry Pi USB-C Gadget"
   build-raspios-lite-arm64:
-    needs: create-release
     runs-on: ubuntu-latest
     steps:
       - uses: actions/setup-go@v2.1.3
