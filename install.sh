@@ -4,9 +4,7 @@ sudo apt install -y cmake \
                      libavahi-compat-libdnssd-dev libplist-dev libssl-dev \
                      build-essential\
                      pkg-config \
-                     git
-
-sudo apt install -y libraspberrypi-dev libraspberrypi-doc
+                     git libraspberrypi-dev libraspberrypi-doc
 
 sudo apt install -y libssl-dev \
     libplist-dev \
