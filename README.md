@@ -1,7 +1,4 @@
-# Usefull links
 https://unix.stackexchange.com/questions/416785/how-to-send-commands-to-fbi-over-ssh <br/>
-uxplay -n $(hostname | tr '[:lower:]' '[:upper:]') -nh -pin $pin<br/>
-
 Create random 4digit pin for uxplay on each boot and display it on fbi<br/>
 
 ```bash
