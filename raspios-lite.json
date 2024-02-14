@@ -1,0 +1,72 @@
+{
+	"variables": {
+		"url": "{{env `IMG_URL`}}",
+		"md5_url": "{{env `MD5_URL`}}",
+		"image_path": "{{env `FILENAME`}}"
+	  },
+	"builders": [
+		{
+			"type": "arm",
+			"file_urls": [ "{{user `url`}}"],
+			"file_checksum_url": "{{user `md5_url`}}",
+			"file_checksum_type": "sha256",
+			"file_target_extension": "xz",
+			"file_unarchive_cmd": [
+				"xz",
+				"--decompress",
+				"$ARCHIVE_PATH"
+			],
+			"image_build_method": "resize",
+			"image_path": "{{user `image_path`}}",
+			"image_size": "4G",
+			"image_type": "dos",
+			"image_partitions": [
+				{
+					"name": "boot",
+					"type": "c",
+					"start_sector": "8192",
+					"filesystem": "vfat",
+					"size": "256M",
+					"mountpoint": "/boot"
+				},
+				{
+					"name": "root",
+					"type": "83",
+					"start_sector": "532480",
+					"filesystem": "ext4",
+					"size": "0",
+					"mountpoint": "/"
+				}
+			],
+			"image_chroot_env": [
+				"PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin"
+			],
+			"qemu_binary_source_path": "/usr/bin/qemu-arm-static",
+			"qemu_binary_destination_path": "/usr/bin/qemu-arm-static"
+		}
+	],
+	"provisioners": [
+		{
+			"type": "shell",
+			"inline": [
+				"sudo apt update",
+				"sudo apt install -y cmake build-essential pkg-config git",
+				"sudo apt install -y libavahi-compat-libdnssd-dev libplist-dev libssl-dev",
+				"sudo apt install -y libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev gstreamer1.0-libav",
+				"sudo apt install -y gstreamer1.0-plugins-good gstreamer1.0-plugins-bad pulseaudio"
+			]
+		},
+		{
+			"type": "shell",
+			"inline": [
+				"export CFLAGS='-D_FILE_OFFSET_BITS=64'",
+				"export CXXFLAGS='-D_FILE_OFFSET_BITS=64'",
+				"git clone https://github.com/FDH2/UxPlay && cd UxPlay",
+				"mkdir build && cd build",
+				"cmake .. -DCMAKE_CXX_FLAGS='-O3' -DCMAKE_C_FLAGS='-O3'",
+				"make -j$(nproc)",
+				"make install"
+			]
+		}
+	]
+}
