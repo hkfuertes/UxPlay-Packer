@@ -30,7 +30,7 @@ jobs:
       - name: Build the image
         run: |-
           cp plugin/packer-builder-arm .
-          sudo packer build
+          sudo packer build raspios-lite.json
       - uses: actions/upload-artifact@v4
         id: upload
         with:
