@@ -37,7 +37,7 @@ jobs:
 
       - name: Run `packer build`
         id: build
-        run: "packer build raspios-lite.json"
+        run: "sudo packer build raspios-lite.json"
         
       - uses: actions/upload-artifact@v4
         id: upload
