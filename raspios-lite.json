@@ -71,9 +71,20 @@
 			]
 		},
 		{
+			"type": "file",
+			"source": "sources//uxplayfb.sh",
+			"destination": "/usr/bin/uxplayfb"
+		},
+		{
+			"type": "file",
+			"source": "sources//uxplayfb.service",
+			"destination": "/etc/systemd/system/uxplayfb.service"
+		},
+		{
 			"type": "shell",
 			"inline": [
-				"sudo systemctl disable getty@tty1"
+				"chmod +x /usr/bin/uxplayfb",
+				"systemctl enable uxplayfb.service"
 			]
 		}
 	],

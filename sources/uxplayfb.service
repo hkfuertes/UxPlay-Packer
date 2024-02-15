@@ -1,0 +1,12 @@
+[Unit]
+Description=UxPlay service on FB + PIN Display
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/uxplayfb
+Restart=always
+
+
+[Install]
+WantedBy=default.target
+RequiredBy=network.target
