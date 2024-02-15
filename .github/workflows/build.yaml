@@ -29,6 +29,11 @@ jobs:
           go mod download
           go build
           cp packer-builder-arm ..
+      
+      - name: Fetch additional packages
+        run: |-
+          sudo apt-get update
+          sudo apt-get install tree fdisk gdisk qemu-user-static libarchive-tools psmisc tar autoconf make
 
       - name: Run `packer build`
         id: build
