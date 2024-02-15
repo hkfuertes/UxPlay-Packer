@@ -91,10 +91,10 @@
 	"post-processors": [
 		{
 			"type": "compress",
-			"format": "gz",
-			"output": "{{user `image_path`}}.gz",
+			"format": "zip",
+			"output": "{{user `image_path`}}.zip",
 			"keep_input_artifact": true,
-			"compresion_level": 9
+			"compression_level": 9
 		}
 	]
 }

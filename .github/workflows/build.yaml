@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-raspios-lite-arm64:
+  build-raspios:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/setup-go@v2.1.3
@@ -26,11 +26,7 @@ jobs:
       - name: Build the image
         run: |-
           cp plugin/packer-builder-arm .
-          sudo packer build raspios-lite-arm64.json | tee build.log || true
-          grep "::BUILD::SUCCESS" build.log
-          test -f raspios-lite-arm64-2022-04-04-arm64.img
-          zip raspios-lite-arm64-2022-04-04-arm64.img.zip raspios-lite-arm64-2022-04-04-arm64.img
-      - name: Upload release asset
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh release upload --clobber ${{github.ref}} raspios-lite-arm64-2022-04-04-arm64.img.zip
+          sudo packer build raspios-lite.json
+      - uses: actions/upload-artifact@v4
+        with:
+          path: '*.img'
