@@ -6,6 +6,8 @@ export PIN=$(printf %04d ${RANDOM:0:4})
 export NAME=$(hostname | tr '[:lower:]' '[:upper:]')
 uxplay -n $NAME -nh -pin $PIN
 # Display $PIN with fbi
+convert -size 1280x720 xc:black -gravity southeast -pointsize 48 -draw "fill white text 50,20 '$PIN'" result.jpg
+sudo fbi -T 1 -noedit -nocomments -a -noverbose result.jpg
 ```
 
 Pre-built Raspberry Pi images to simplify using the Pi as a USB gadget.
