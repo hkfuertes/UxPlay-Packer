@@ -74,5 +74,14 @@
 				"sudo systemctl disable getty@tty1"
 			]
 		}
-	]
+	],
+	{
+  "post-processors": [
+    {
+      "type": "compress",
+      "format": "tar.gz"
+    }
+  ]
+}
+
 }
