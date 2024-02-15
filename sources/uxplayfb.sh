@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# This should be placed in /usr/bin/
+# This should be placed in /usr/bin/uxplayfb
 
 if [ "$EUID" -ne 0 ]
 then
