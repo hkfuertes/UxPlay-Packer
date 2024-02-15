@@ -33,7 +33,7 @@ jobs:
       - name: Fetch additional packages
         run: |-
           sudo apt-get update
-          sudo apt-get install tree fdisk gdisk qemu-user-static libarchive-tools psmisc tar autoconf make
+          sudo apt-get install tree fdisk gdisk qemu-user-static libarchive-tools psmisc tar autoconf make qemu-utils
 
       - name: Run `packer build`
         id: build
