@@ -1,6 +1,6 @@
-https://unix.stackexchange.com/questions/416785/how-to-send-commands-to-fbi-over-ssh <br/>
-Create random 4digit pin for uxplay on each boot and display it on fbi<br/>
+Pre-built Raspberry Pi images with [UxPlay](https://github.com/FDH2/UxPlay) installed for AirPlay 2 Mirroring.
 
+### Usage
 ```bash
 export PIN=$(printf %04d ${RANDOM:0:4})
 export NAME=$(hostname | tr '[:lower:]' '[:upper:]')
@@ -10,54 +10,21 @@ uxplay -n $NAME -nh -pin $PIN
 convert -size $SIZE xc:black -gravity southeast -pointsize 48 -draw "fill white text 50,20 '$PIN'" result.jpg
 sudo fbi -T 1 -noedit -nocomments -a -noverbose result.jpg
 ```
+> This will later be splitted into separated services...
 
-Pre-built Raspberry Pi images to simplify using the Pi as a USB gadget.
-
-The basic Raspberry Pi OS images are a faithful reproduction of the work done by [Ben Hardill][bh],
-with some additional automation wrapped around to get to a publish release on GitHub.
-
-Other operating systems are derived from the basic template used in Raspberry Pi OS.
-
-## Available Images
-
-* Raspberry Pi OS Lite (`arm64` and `armhf`)
-
-
-## Burning Your Image
-
-Since v0.2, images no longer have a default user/password. The recommened approach is to set the user/password during image burn with [Raspberry Pi Imager][rpimg].
-
-I have a video showing how to burn and customize an image here:
-
-[![Raspberry Pi iPad Pro Setup Guide](https://img.youtube.com/vi/dUeQUCF6KPc/hqdefault.jpg
-)](https://youtu.be/dUeQUCF6KPc "Raspberry Pi iPad Pro Setup Guide")
-
-## Building Images with Docker
-
-The easiest way to build images locally is to use the pre-built `packer-builder-arm`[pba] Docker images
-
+### Build the image
+```bash
+docker-compose run build
 ```
-docker run --rm --privileged -v /dev:/dev -v ${PWD}:/build mkaczanowski/packer-builder-arm build <build_json_path>
+You might want to update the base images, todo so, edit the urls in the `docker-compose.yml` file:
+```yaml
+...
+    environment:
+      - IMG_URL=https://downloads.raspberrypi.org/raspios_lite_arm64/images/raspios_lite_arm64-2023-12-11/2023-12-11-raspios-bookworm-arm64-lite.img.xz
+      - MD5_URL=https://downloads.raspberrypi.org/raspios_lite_arm64/images/raspios_lite_arm64-2023-12-11/2023-12-11-raspios-bookworm-arm64-lite.img.xz.sha256
+      - FILENAME=raspios-lite-arm64.img
+...
 ```
-
-Replace `<build_json_path>` with any of the image definition files in the root directory.
-
-## Building Images with Packer directly
-
-To build you need [Packer][packer] and the `packer-builder-arm` plugin.
-To build `packer-build-arm` you need [Go][go].
-
-With Packer and `packer-builder-arm` installed:
-
-```
-sudo packer build raspios-lite-usb-gadget-arm.json
-```
-
-You can substitute any other build specification in the call to `packer build`.
-
-
-[packer]: https://www.packer.io/
-[pba]: https://github.com/mkaczanowski/packer-builder-arm
-[bh]: https://www.hardill.me.uk/wordpress/2020/02/21/building-custom-raspberry-pi-sd-card-images/
-[go]: https://golang.org
-[rpimg]: https://www.raspberrypi.com/software/
+You can visit:
+- https://downloads.raspberrypi.org/raspios_lite_arm64/images/ for the 64bit images
+- https://downloads.raspberrypi.org/raspios_lite_armhf/images/ for the 32bit images
