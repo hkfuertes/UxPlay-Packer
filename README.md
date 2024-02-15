@@ -1,4 +1,4 @@
-Pre-built Raspberry Pi images with [UxPlay](https://github.com/FDH2/UxPlay) installed for AirPlay 2 Mirroring.
+Pre-built Raspberry Pi images with [UxPlay](https://github.com/FDH2/UxPlay) installed for AirPlay 2 Mirroring. A black screen will be displayed by default with the AirPlay Pin display in the lower right corner. You can use the `rpi-imager` to setup wifi credentials and hostname, as this last one will be the name of the airplay receiver.
 
 ### Build the image
 ```bash
