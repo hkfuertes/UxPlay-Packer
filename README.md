@@ -4,9 +4,10 @@ Create random 4digit pin for uxplay on each boot and display it on fbi<br/>
 ```bash
 export PIN=$(printf %04d ${RANDOM:0:4})
 export NAME=$(hostname | tr '[:lower:]' '[:upper:]')
+export SIZE=$(cat /sys/class/graphics/fb0/virtual_size | sed -e 's/,/x/g')
 uxplay -n $NAME -nh -pin $PIN
 # Display $PIN with fbi
-convert -size 1280x720 xc:black -gravity southeast -pointsize 48 -draw "fill white text 50,20 '$PIN'" result.jpg
+convert -size $SIZE xc:black -gravity southeast -pointsize 48 -draw "fill white text 50,20 '$PIN'" result.jpg
 sudo fbi -T 1 -noedit -nocomments -a -noverbose result.jpg
 ```
 
