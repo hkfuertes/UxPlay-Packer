@@ -50,7 +50,7 @@
 			"type": "shell",
 			"inline": [
 				"sudo apt update",
-				"sudo apt install -y cmake build-essential pkg-config git fbi",
+				"sudo apt install -y cmake build-essential pkg-config git fbi imagemagick",
 				"sudo apt install -y libavahi-compat-libdnssd-dev libplist-dev libssl-dev",
 				"sudo apt install -y libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev gstreamer1.0-libav",
 				"sudo apt install -y gstreamer1.0-plugins-good gstreamer1.0-plugins-bad pulseaudio"
