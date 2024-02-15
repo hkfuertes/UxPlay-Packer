@@ -3,11 +3,13 @@
 		"url": "{{env `IMG_URL`}}",
 		"md5_url": "{{env `MD5_URL`}}",
 		"image_path": "{{env `FILENAME`}}"
-	  },
+	},
 	"builders": [
 		{
 			"type": "arm",
-			"file_urls": [ "{{user `url`}}"],
+			"file_urls": [
+				"{{user `url`}}"
+			],
 			"file_checksum_url": "{{user `md5_url`}}",
 			"file_checksum_type": "sha256",
 			"file_target_extension": "xz",
@@ -75,13 +77,13 @@
 			]
 		}
 	],
-	{
-  "post-processors": [
-    {
-      "type": "compress",
-      "format": "tar.gz"
-    }
-  ]
-}
-
+	"post-processors": [
+		{
+			"type": "compress",
+			"format": "gz",
+			"output": "{{user `image_path`}}.gz",
+			"keep_input_artifact": true,
+			"compresion_level": 9
+		}
+	]
 }
