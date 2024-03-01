@@ -1,5 +1,6 @@
 *.img
 *.gz
+*.zip
 packer-builder-arm
 .DS_Store
 *.log

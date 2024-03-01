@@ -19,3 +19,11 @@ services:
       - IMG_URL=https://downloads.raspberrypi.org/raspios_lite_arm64/images/raspios_lite_arm64-2023-12-11/2023-12-11-raspios-bookworm-arm64-lite.img.xz
       - MD5_URL=https://downloads.raspberrypi.org/raspios_lite_arm64/images/raspios_lite_arm64-2023-12-11/2023-12-11-raspios-bookworm-arm64-lite.img.xz.sha256
       - FILENAME=raspios-lite-arm64.img
+  
+  build_legacy_ui:
+    <<: *builder
+    command: build raspios-lite-ui.json
+    environment:
+      - IMG_URL=https://downloads.raspberrypi.com/raspios_oldstable_lite_arm64/images/raspios_oldstable_lite_arm64-2023-12-06/2023-12-05-raspios-bullseye-arm64-lite.img.xz
+      - MD5_URL=https://downloads.raspberrypi.com/raspios_oldstable_lite_arm64/images/raspios_oldstable_lite_arm64-2023-12-06/2023-12-05-raspios-bullseye-arm64-lite.img.xz.sha256
+      - FILENAME=raspios-lite-arm64-legacy.img

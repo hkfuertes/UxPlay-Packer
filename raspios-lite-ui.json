@@ -52,15 +52,18 @@
 			"type": "shell",
 			"inline": [
 				"sudo apt update",
-				"sudo apt install -y cmake build-essential pkg-config git fbi imagemagick",
-				"sudo apt install -y libavahi-compat-libdnssd-dev libplist-dev libssl-dev",
-				"sudo apt install -y libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev gstreamer1.0-libav",
-				"sudo apt install -y gstreamer1.0-plugins-good gstreamer1.0-plugins-bad pulseaudio"
-			]
+				"# Installation of pygame library",
+				"sudo apt install -y python3-pygame"
+				]
 		},
 		{
 			"type": "shell",
 			"inline": [
+				"# Installation of UxPlay",
+				"sudo apt install -y cmake build-essential pkg-config git fbi imagemagick",
+				"sudo apt install -y libavahi-compat-libdnssd-dev libplist-dev libssl-dev",
+				"sudo apt install -y libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev gstreamer1.0-libav",
+				"sudo apt install -y gstreamer1.0-plugins-good gstreamer1.0-plugins-bad pulseaudio",
 				"export CFLAGS='-D_FILE_OFFSET_BITS=64'",
 				"export CXXFLAGS='-D_FILE_OFFSET_BITS=64'",
 				"git clone https://github.com/FDH2/UxPlay && cd UxPlay",
@@ -71,20 +74,16 @@
 			]
 		},
 		{
-			"type": "file",
-			"source": "sources//uxplayfb.sh",
-			"destination": "/usr/bin/uxplayfb"
-		},
-		{
-			"type": "file",
-			"source": "sources//uxplayfb.service",
-			"destination": "/etc/systemd/system/uxplayfb.service"
-		},
-		{
 			"type": "shell",
 			"inline": [
-				"chmod +x /usr/bin/uxplayfb",
-				"# systemctl enable uxplayfb.service"
+				"# Installation of Flutter-Pi",
+				"sudo apt install -y cmake libgl1-mesa-dev libgles2-mesa-dev libegl1-mesa-dev libdrm-dev libgbm-dev",
+				"sudo apt install -y ttf-mscorefonts-installer fontconfig libsystemd-dev libinput-dev libudev-dev  libxkbcommon-dev",
+				"sudo apt install -y libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev libgstreamer-plugins-bad1.0-dev gstreamer1.0-plugins-base",
+				"sudo apt install -y gstreamer1.0-plugins-good gstreamer1.0-plugins-ugly gstreamer1.0-plugins-bad gstreamer1.0-libav gstreamer1.0-alsa",				"git clone https://github.com/ardera/flutter-pi && cd flutter-pi",
+				"mkdir build && cd build && cmake ..",
+				"make -j$(nproc)",
+				"sudo make install"
 			]
 		}
 	],
